@@ -14,4 +14,9 @@ async function deleteUsuario (codigo){
     //aplicar regras de negocio
 }
 
-export default {createUsuario, getUsuario, deleteUsuario}
+async function updateUsuario (usuario){
+    return await usuarioRepository.updateUsuario(usuario)
+    //aplicar regras de negócio
+}
+
+export default {createUsuario, getUsuario, deleteUsuario, updateUsuario}

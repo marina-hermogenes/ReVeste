@@ -45,4 +45,19 @@ async function deleteUsuario(codigo){
     return dados;
 }
 
-export default {createUsuario, getUsuario, deleteUsuario}
+async function updateUsuario(usuario){
+    const conn = await bd.conectar()
+    let dados = null;
+    try{
+        var query = await conn.query("update usuario set email=$2, senha=$3, nome=$4, dataNasc=$5, telefone=$6, chavePix=$7 where codigo=$1 returning *", [usuario.codigo, usuario.email, usuario.senha, usuario.nome, usuario.dataNasc, usuario.telefone, usuario.chavePix])
+        console.log(query.rows)
+        dados = query.rows
+    } catch (erro){
+        console.log(erro)
+    } finally {
+        conn.release();
+    }
+    return dados;
+}
+
+export default {createUsuario, getUsuario, deleteUsuario, updateUsuario}

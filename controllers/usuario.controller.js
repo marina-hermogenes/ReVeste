@@ -62,4 +62,21 @@ async function deleteUsuario (req, res){
     res.send(dados)
 }
 
-export default {createUsuario, getUsuario, deleteUsuario}
+async function updateUsuario (req, res){
+    const codigo = req.params.codigo
+    const email = req.body.email
+    const senha = req.body.senha
+    const nome = req.body.nome
+    const dataNasc = req.body.dataNasc
+    const telefone = req.body.telefone
+    let chavePix = req.body.chavePix
+
+    if (chavePix == ""){
+        chavePix = null
+    }
+
+    const dados = await usuarioServices.updateUsuario({codigo, email, senha, nome, dataNasc, telefone, chavePix})
+    res.send(dados)
+}
+
+export default {createUsuario, getUsuario, deleteUsuario, updateUsuario}
