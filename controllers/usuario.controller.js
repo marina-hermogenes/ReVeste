@@ -56,4 +56,10 @@ async function getUsuario (req, res){
     res.send(dados)
 }
 
-export default {createUsuario, getUsuario}
+async function deleteUsuario (req, res){
+    const codigo = req.params.codigo
+    const dados = await usuarioServices.deleteUsuario(codigo)
+    res.send(dados)
+}
+
+export default {createUsuario, getUsuario, deleteUsuario}
