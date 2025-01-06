@@ -50,4 +50,10 @@ async function createUsuario (req, res){
     }
 }
 
-export default {createUsuario}
+async function getUsuario (req, res){
+    const codigo = req.params.codigo
+    const dados = await usuarioServices.getUsuario(codigo)
+    res.send(dados)
+}
+
+export default {createUsuario, getUsuario}

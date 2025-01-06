@@ -4,4 +4,8 @@ async function createUsuario (usuario){
     return await usuarioRepository.createUsuario(usuario)
 }
 
-export default {createUsuario}
+async function getUsuario (codigo){
+    return await usuarioRepository.getUsuario(codigo)
+}
+
+export default {createUsuario, getUsuario}

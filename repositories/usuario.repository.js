@@ -15,4 +15,19 @@ async function createUsuario (usuario){
     return dados;
 }
 
-export default {createUsuario}
+async function getUsuario(codigo){
+    const conn = await bd.conectar()
+    let dados = null;
+    try{
+        var query = await conn.query("select * from usuario where codigo=$1", [codigo])
+        console.log(query.rows)
+        dados = query.rows
+    } catch (erro){
+        console.log(erro)
+    } finally {
+        conn.release();
+    }
+    return dados;
+}
+
+export default {createUsuario, getUsuario}
