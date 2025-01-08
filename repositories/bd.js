@@ -10,7 +10,7 @@ async function conectar(){
         password: '',
         host: 'localhost',
         port: 5432,
-        database: 'Teste',
+        database: '',
     })
     global.connection = pool;
     console.log("POOL" + pool)

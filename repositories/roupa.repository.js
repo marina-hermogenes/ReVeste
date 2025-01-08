@@ -1,5 +1,43 @@
 import bd from './bd.js'
 
+async function createRoupa(roupa) {
+    const conn = await bd.conectar();
+    let dados = null;
+
+    if (roupa.preco <= 0){
+        throw new Error("Preço deve ser maior que zero.");
+    }
+
+    if (roupa.codigoUsuario <= 0){
+        throw new Error("Código do usuário deve ser maior que zero")
+    }
+
+    try {
+        const query = `
+            INSERT INTO roupa (nome, descricao, tamanho, tipo, preco, disponivel, foto, codigoUsuario)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING *;
+        `;
+        const values = [
+            roupa.nome,
+            roupa.descricao || null,
+            roupa.tamanho,
+            roupa.tipo,
+            roupa.preco,
+            true,
+            roupa.foto || null,
+            roupa.codigoUsuario,
+        ];
+        const result = await conn.query(query, values);
+        dados = result.rows[0];
+    } catch (erro) {
+        console.error(erro);
+    } finally {
+        conn.release();
+    }
+    return dados;
+}
+
 async function deleteRoupa(codigo){
     const conn = await bd.conectar()
     let dados = null;
@@ -15,4 +53,4 @@ async function deleteRoupa(codigo){
     return dados;
 }
 
-export default {deleteRoupa}
+export default {createRoupa, deleteRoupa}
