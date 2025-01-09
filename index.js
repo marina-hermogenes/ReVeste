@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended : true}));
+app.use(express.static('view'));
 app.use("/roupa", roupaRoutes);
 app.use("/usuario", usuarioRoutes);
 app.listen(3000, rodar);

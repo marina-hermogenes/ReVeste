@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roupas Cadastradas</title>
+    <link rel="stylesheet" type="text/css" href="getRoupasCadastradas.css" media="screen" />
+</head>
+<body>
+    <h1>Roupas Cadastradas</h1>
+    <input type="text" id="codigoUsuario" placeholder="Digite o código do usuário">
+    <button onclick="buscarRoupas()">Buscar Roupas</button>
+    
+    <!-- Estrutura tipo tabela com divs -->
+     <div class="fora-tabela">
+        <div class="table" id="roupasTable">
+            <!-- Linhas de dados serão adicionadas aqui -->
+        </div>    
+     </div>
+    <script>
+        console.log(`Script carregado corretamente:`);
+        function buscarRoupas() {
+            console.log(`Função buscar roupas chamada`);
+            const codigo = document.getElementById('codigoUsuario').value;
+            console.log(`Código do usuário inserido: ${codigo}`);
+            fetch(`http://localhost:3000/roupa/${codigo}`)
+                .then(response => {
+                    console.log(`Resposta HTTP recebida: ${response.status}`);
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const table = document.getElementById('roupasTable');
+                    data.forEach(roupa => {
+                        const row = document.createElement('div');
+                        row.className = 'row';
+                        if (roupa.descricao == null){
+                            roupa.descricao = ""
+                        }
+                        if (roupa.foto == null){
+                            roupa.foto = ""
+                        } else {
+                            roupa.foto = `data:image/png;base64,${roupa.foto.toString('base64')}`;
+                        }
+                        row.innerHTML = ``
+                        row.innerHTML = `
+                            <div class="elemento">
+                                <div class="cell1">${roupa.nome}</div>
+                                <div class="cell2">${roupa.descricao}</div>
+                                <div class="cell3">${roupa.tamanho}</div>
+                                <div class="cell4">${roupa.tipo}</div>
+                                <div class="cell5">${roupa.preco}</div>
+                                <div class="cell6">
+                                     <img src="${roupa.foto}" alt="Foto da roupa">
+                                </div>
+                            </div>
+                        `;
+                        table.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Erro ao buscar roupas:', error));
+        }
+    </script>
+</body>
+</html>

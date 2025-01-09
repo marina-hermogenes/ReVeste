@@ -53,4 +53,25 @@ async function deleteRoupa(codigo){
     return dados;
 }
 
-export default {createRoupa, deleteRoupa}
+async function getRoupasCadastradas(codigo){
+    const conn = await bd.conectar()
+    let dados = null;
+    try{
+        var query = await conn.query("select * from roupa where codigoUsuario=$1", [codigo])
+        console.log(query.rows)
+        dados = query.rows
+        dados.map(roupa => {
+            if (roupa.foto) {
+                roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString('base64')}`;
+            }
+        });
+        console.log(dados)
+    } catch (erro){
+        console.log(erro)
+    } finally {
+        conn.release();
+    }
+    return dados;
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas}

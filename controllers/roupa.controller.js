@@ -19,9 +19,14 @@ async function createRoupa(req, res) {
 
 async function deleteRoupa (req, res){
     const codigo = req.params.codigo;
-    console.log("Código: " + codigo);
     const dados = await roupaServices.deleteRoupa(codigo);
     res.send(dados);
 }
 
-export default {createRoupa, deleteRoupa}
+async function getRoupasCadastradas (req, res){
+    const codigo = req.params.codigo
+    const dados = await roupaServices.getRoupasCadastradas(codigo)
+    res.json(dados)
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas}

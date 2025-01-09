@@ -8,4 +8,8 @@ async function deleteRoupa (codigo){
     return await roupaRepository.deleteRoupa(codigo);
 }
 
-export default {createRoupa, deleteRoupa}
+async function getRoupasCadastradas (codigo){
+    return await roupaRepository.getRoupasCadastradas(codigo)
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas}
