@@ -29,4 +29,10 @@ async function getRoupasCadastradas (req, res){
     res.json(dados)
 }
 
-export default {createRoupa, deleteRoupa, getRoupasCadastradas}
+async function getRoupasVendidas (req, res){
+    const codigo = req.params.codigo
+    const dados = await roupaServices.getRoupasVendidas(codigo)
+    res.json(dados)
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas}

@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.delete('/:codigo', roupaController.deleteRoupa);
 router.post('/cadastro', roupaController.createRoupa);
-router.get('/:codigo', roupaController.getRoupasCadastradas);
+router.get('/roupasCadastradas/:codigo', roupaController.getRoupasCadastradas);
+router.get('/roupasVendidas/:codigo', roupaController.getRoupasVendidas);
 
 export default router;

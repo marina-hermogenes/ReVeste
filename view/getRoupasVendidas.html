@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="getRoupasCadastradas.css" media="screen" />
 </head>
 <body>
-    <h1>Roupas Cadastradas</h1>
+    <h1>Roupas Vendidas</h1>
     <input type="text" id="codigoUsuario" placeholder="Digite o código do usuário">
     <button onclick="buscarRoupas()">Buscar Roupas</button>
     
@@ -23,7 +23,7 @@
             console.log(`Função buscar roupas chamada`);
             const codigo = document.getElementById('codigoUsuario').value;
             console.log(`Código do usuário inserido: ${codigo}`);
-            fetch(`http://localhost:3000/roupa/roupasCadastradas/${codigo}`)
+            fetch(`http://localhost:3000/roupa/roupasVendidas/${codigo}`)
                 .then(response => {
                     console.log(`Resposta HTTP recebida: ${response.status}`);
                     if (!response.ok) {

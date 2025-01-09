@@ -12,4 +12,8 @@ async function getRoupasCadastradas (codigo){
     return await roupaRepository.getRoupasCadastradas(codigo)
 }
 
-export default {createRoupa, deleteRoupa, getRoupasCadastradas}
+async function getRoupasVendidas (codigo){
+    return await roupaRepository.getRoupasVendidas(codigo)
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas}
