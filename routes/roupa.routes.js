@@ -3,7 +3,7 @@ import roupaController from '../controllers/roupa.controller.js'
 
 const router = express.Router()
 
-router.delete('/:codigo', roupaController.deleteRoupa);
+router.delete('/excluirRoupas/:codigo', roupaController.deleteRoupa);
 router.post('/cadastro', roupaController.createRoupa);
 router.get('/roupasCadastradas/:codigo', roupaController.getRoupasCadastradas);
 router.get('/roupasVendidas/:codigo', roupaController.getRoupasVendidas);

@@ -4,26 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roupas Cadastradas</title>
-    <link rel="stylesheet" type="text/css" href="getRoupasCadastradas.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="tabelasGet.css" media="screen" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>Roupas Vendidas</h1>
-    <input type="text" id="codigoUsuario" placeholder="Digite o código do usuário">
-    <button onclick="buscarRoupas()">Buscar Roupas</button>
-    
-    <!-- Estrutura tipo tabela com divs -->
-     <div class="fora-tabela">
-        <div class="table" id="roupasTable">
-            <!-- Linhas de dados serão adicionadas aqui -->
-        </div>    
-     </div>
+<body onload="buscarRoupas()">
+    <input type="text" id="codigoUsuario" value="2" hidden> <!--tirar depois-->
+     <header>
+        <img src="imagens/seta.png" alt="seta">
+        <img src="imagens/logo.png" alt="logo">
+     </header>
+    <div class="table" id="roupasTable">
+        <div class="row">
+            <h2>Nome</h2>
+            <h2>Descrição</h2>
+            <h2>Tamanho</h2>
+            <h2>Tipo</h2>
+            <h2>Preço</h2>
+            <h2>Imagem</h2>
+        </div>
+    </div>    
     <script>
         console.log(`Script carregado corretamente:`);
         function buscarRoupas() {
-            console.log(`Função buscar roupas chamada`);
             const codigo = document.getElementById('codigoUsuario').value;
-            console.log(`Código do usuário inserido: ${codigo}`);
-            fetch(`http://localhost:3000/roupa/roupasVendidas/${codigo}`)
+            //fetch(`http://localhost:3000/roupa/roupasVendidas/${codigo}`)
+            fetch(`http://localhost:3000/roupa/roupasVendidas/2`) //tirar depois
                 .then(response => {
                     console.log(`Resposta HTTP recebida: ${response.status}`);
                     if (!response.ok) {
@@ -46,15 +51,13 @@
                         }
                         row.innerHTML = ``
                         row.innerHTML = `
-                            <div class="elemento">
-                                <div class="cell1">${roupa.nome}</div>
-                                <div class="cell2">${roupa.descricao}</div>
-                                <div class="cell3">${roupa.tamanho}</div>
-                                <div class="cell4">${roupa.tipo}</div>
-                                <div class="cell5">${roupa.preco}</div>
-                                <div class="cell6">
-                                     <img src="${roupa.foto}" alt="Foto da roupa">
-                                </div>
+                            <div class="cell1">${roupa.nome}</div>
+                            <div class="cell2">${roupa.descricao}</div>
+                            <div class="cell3">${roupa.tamanho}</div>
+                            <div class="cell4">${roupa.tipo}</div>
+                            <div class="cell5">R$${roupa.preco}</div>
+                            <div class="cell6">
+                                <img src="Imagens/blusa.png" alt="Foto da roupa"> <!--tirar depois-->
                             </div>
                         `;
                         table.appendChild(row);
