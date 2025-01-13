@@ -95,4 +95,25 @@ async function getRoupasVendidas(codigo){
     return dados;
 }
 
-export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas}
+async function getAllRoupas() {
+    const conn = await bd.conectar();
+    let dados = null;
+    try {
+        const query = "select * from roupa;";
+        const result = await conn.query(query);
+        dados = result.rows;
+
+        dados.map(roupa => {
+            if (roupa.foto) {
+                roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString('base64')}`;
+            }
+        });
+    } catch (erro) {
+        console.error(erro);
+    } finally {
+        conn.release();
+    }
+    return dados;
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas}

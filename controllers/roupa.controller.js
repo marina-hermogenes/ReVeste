@@ -35,4 +35,14 @@ async function getRoupasVendidas (req, res){
     res.json(dados)
 }
 
-export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas}
+async function getAllRoupas(req, res) {
+    try {
+        const dados = await roupaServices.getAllRoupas();
+        res.status(200).json(dados);
+    } catch (error) {
+        console.error("Erro ao consultar todas as roupas:", error);
+        res.status(500).json({ error: "Erro ao consultar todas as roupas." });
+    }
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas}
