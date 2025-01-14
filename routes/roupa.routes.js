@@ -3,10 +3,10 @@ import roupaController from '../controllers/roupa.controller.js'
 
 const router = express.Router()
 
-router.delete('/excluirRoupas/:codigo', roupaController.deleteRoupa);
+router.delete('/excluir/:codigo', roupaController.deleteRoupa);
 router.post('/cadastro', roupaController.createRoupa);
-router.get('/roupasCadastradas/:codigo', roupaController.getRoupasCadastradas);
-router.get('/roupasVendidas/:codigo', roupaController.getRoupasVendidas);
+router.get('/cadastradas/:codigo', roupaController.getRoupasCadastradas);
+router.get('/vendidas/:codigo', roupaController.getRoupasVendidas);
 router.get('/', roupaController.getAllRoupas);
 
 export default router;

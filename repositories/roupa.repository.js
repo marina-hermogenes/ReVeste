@@ -43,7 +43,7 @@ async function deleteRoupa(codigo){
     let dados = null;
     try{
         var query = await conn.query("delete from roupa where codigo=$1 returning *", [codigo])
-        console.log("xxx" + query.rows)
+        console.log(query.rows)
         dados = query.rows
     } catch (erro){
         console.log(erro)
