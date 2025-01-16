@@ -9,5 +9,6 @@ router.get('/cadastradas/:codigo', roupaController.getRoupasCadastradas);
 router.get('/vendidas/:codigo', roupaController.getRoupasVendidas);
 router.get('/', roupaController.getAllRoupas);
 router.get('/buscar', roupaController.getRoupasPeloNome);
+router.get('/tipo', roupaController.getRoupasPeloTipo);
 
 export default router;

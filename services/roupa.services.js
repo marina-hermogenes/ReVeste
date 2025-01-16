@@ -24,4 +24,8 @@ async function getRoupasPeloNome(nome) {
     return await roupaRepository.getRoupasPeloNome(nome);
 }
 
-export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas, getRoupasPeloNome}
+async function getRoupasPeloTipo(tipo) {
+    return await roupaRepository.getRoupasPeloTipo(tipo);
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas, getRoupasPeloNome, getRoupasPeloTipo}

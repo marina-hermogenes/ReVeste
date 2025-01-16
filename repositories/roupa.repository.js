@@ -140,5 +140,28 @@ async function getRoupasPeloNome(nome) {
     return dados;
 }
 
+async function getRoupasPeloTipo(tipo) {
+    const conn = await bd.conectar();
+    let dados = null;
 
-export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas, getRoupasPeloNome}
+    try {
+        const query = "select * from roupa where tipo ILIKE $1;";
+        const values = [`%${tipo}%`];
+        const result = await conn.query(query, values);
+        dados = result.rows;
+
+        dados.map(roupa => {
+            if (roupa.foto) {
+                roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString('base64')}`;
+            }
+        });
+    } catch (erro) {
+        console.error(erro);
+    } finally {
+        conn.release();
+    }
+
+    return dados;
+}
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas, getRoupasPeloNome, getRoupasPeloTipo}

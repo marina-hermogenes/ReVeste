@@ -73,4 +73,21 @@ async function getRoupasPeloNome(req, res) {
     }
 }
 
-export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas, getRoupasPeloNome}
+async function getRoupasPeloTipo(req, res) {
+    const { tipo } = req.query;
+    if (!tipo) {
+        return res.status(400).json({ error: "O campo 'tipo' é obrigatório para busca." });
+    }
+
+    try {
+        const dados = await roupaServices.getRoupasPeloTipo(tipo);
+        res.status(200).json(dados);
+    } catch (error) {
+        console.error("Erro ao buscar roupas pelo tipo:", error);
+        res.status(500).json({ error: "Erro ao buscar roupas pelo tipo." });
+    }
+}
+
+
+
+export default {createRoupa, deleteRoupa, getRoupasCadastradas, getRoupasVendidas, getAllRoupas, getRoupasPeloNome, getRoupasPeloTipo}
