@@ -3,7 +3,7 @@
 # ReVeste
 
 <p align="center">
-  <img src="view/imagens/revestelogo.png" alt="Logo do ReVeste" width="200">
+  <img src="view/Imagens/revestelogo.png" alt="Logo do ReVeste" width="200">
 </p>
 
 ## Visão geral do produto
