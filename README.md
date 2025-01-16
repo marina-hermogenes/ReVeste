@@ -1,4 +1,11 @@
 # ReVeste
+
+# ReVeste
+
+<p align="center">
+  <img src="view/imagens/revestelogo.png" alt="Logo do ReVeste" width="200">
+</p>
+
 ## Visão geral do produto
 ### Descrição do sistema
 O software tem como finalidade organizar o sistema online de um brechó. Ele simplifica a gestão e o monitoramento das transações de compra e venda de produtos, proporcionando um controle eficiente sobre produtos, clientes, vendedores, vendas e operações logísticas.
