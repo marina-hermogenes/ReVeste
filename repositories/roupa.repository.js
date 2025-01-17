@@ -57,7 +57,7 @@ async function getRoupasCadastradas(codigo){
     const conn = await bd.conectar()
     let dados = null;
     try{
-        var query = await conn.query("select * from roupa where codigoUsuario=$1 and disponivel=true", [codigo])
+        var query = await conn.query("select * from roupa where codigoUsuario=$1", [codigo])
         console.log(query.rows)
         dados = query.rows
         dados.map(roupa => {

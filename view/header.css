@@ -1,0 +1,22 @@
+header {
+    width: 100%;
+    height: 70px;
+    background-color: #4D00FF;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+header img {
+    position: absolute;
+    height: 35px;
+}
+
+#seta {
+    left: 20px;
+}
+
+#logo {
+    left: 50%;
+    transform: translateX(-50%);
+}

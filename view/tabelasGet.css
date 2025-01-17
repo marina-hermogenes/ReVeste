@@ -5,29 +5,6 @@
     text-decoration: none;
 }
 
-header {
-    width: 100%;
-    height: 70px;
-    background-color: #4D00FF;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-header img {
-    position: absolute;
-    height: 35px;
-}
-
-#seta {
-    left: 20px;
-}
-
-#logo {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 .table {
     display: flex;
     flex-direction: column;
@@ -59,7 +36,7 @@ header img {
 }
 
 /* Células */
-.cell1, .cell2, .cell3, .cell4, .cell5, .cell6, .row h2 {
+.cell1, .cell2, .cell3, .cell4, .cell5, .cell6, .cell7, .row h2 {
     flex: 1;
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
@@ -75,7 +52,7 @@ header img {
     border: 1px solid #ddd;
 }
 
-.cell-botoes {
+.buttonsCell {
     display: flex;
     justify-content: center;
     gap: 50px;
@@ -105,6 +82,17 @@ button {
 #excluir {
     background-color: #DAFF3F;
     color: #4D00FF;
+}
+
+.erro {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.erro h1 {
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 

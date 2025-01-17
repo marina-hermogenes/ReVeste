@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roupas Cadastradas</title>
     <link rel="stylesheet" type="text/css" href="tabelasGet.css" media="screen" />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="header.css" media="screen" />
 </head>
 <body onload="buscarRoupas()">
     <input type="text" id="codigoUsuario" value="2" hidden> <!--tirar depois-->
@@ -21,14 +22,14 @@
             <h2>Tipo</h2>
             <h2>Preço</h2>
             <h2>Imagem</h2>
+            <h2>Situação</h2>
         </div>
     </div>    
     <script>
-        console.log(`Script carregado corretamente:`);
         function buscarRoupas() {
             const codigo = document.getElementById('codigoUsuario').value;
             //fetch(`http://localhost:3000/roupa/roupasCadastradas/${codigo}`)
-            fetch(`http://localhost:3000/roupa/roupasCadastradas/2`) //tirar depois
+            fetch(`http://localhost:3000/roupa/cadastradas/2`) //tirar depois
                 .then(response => {
                     console.log(`Resposta HTTP recebida: ${response.status}`);
                     if (!response.ok) {
@@ -38,47 +39,67 @@
                 })
                 .then(data => {
                     const table = document.getElementById('roupasTable');
-                    data.forEach(roupa => {
-                        const row = document.createElement('div');
-                        row.className = 'row';
-                        if (roupa.descricao == null){
-                            roupa.descricao = ""
-                        }
-                        if (roupa.foto == null){
-                            roupa.foto = ""
-                        } else {
-                            roupa.foto = `data:image/png;base64,${roupa.foto.toString('base64')}`;
-                        }
-                        row.innerHTML = ``
-                        row.innerHTML = `
-                            <div class="cell1">${roupa.nome}</div>
-                            <div class="cell2">${roupa.descricao}</div>
-                            <div class="cell3">${roupa.tamanho}</div>
-                            <div class="cell4">${roupa.tipo}</div>
-                            <div class="cell5">R$${roupa.preco}</div>
-                            <div class="cell6">
-                                <img src="Imagens/blusa.png" alt="Foto da roupa"> <!--tirar depois-->
-                            </div>
-                        `;
-                        table.appendChild(row);
+                    if(data.length == 0){
+                        const erro = document.createElement('div');
+                        erro.className = 'erro';
+                        erro.innerHTML = '<h1>Não há nenhuma roupa cadastrada no momento.</h1>'
+                        table.appendChild(erro);
+                    } else {
+                        data.forEach(roupa => {
+                            const row = document.createElement('div');
+                            row.className = 'row';
+                            if (roupa.descricao == null){
+                                roupa.descricao = ""
+                            }
+                            if (roupa.foto == null){
+                                roupa.foto = ""
+                            } else {
+                                roupa.foto = `data:image/png;base64,${roupa.foto.toString('base64')}`;
+                            }
 
-                        const buttonsCell = document.createElement('div');
-                        buttonsCell.className = 'cell-botoes';
-                        buttonsCell.innerHTML = `
-                            <button id="editar" onclick="editarRoupas(${roupa.id})">EDITAR</button>
-                            <button id="excluir" onclick="excluirRoupas(${roupa.codigo})">EXCLUIR</button>
-                        `;
-                        table.appendChild(buttonsCell);
-                    });
+                            let stringDisponivel = "";
+                            if (roupa.disponivel){
+                                stringDisponivel = "Disponível";
+                            } else {
+                                stringDisponivel = "Vendida";
+                            }
+
+                            row.innerHTML = ``
+                            row.innerHTML = `
+                                <div class="cell1">${roupa.nome}</div>
+                                <div class="cell2">${roupa.descricao}</div>
+                                <div class="cell3">${roupa.tamanho}</div>
+                                <div class="cell4">${roupa.tipo}</div>
+                                <div class="cell5">R$${roupa.preco}</div>
+                                <div class="cell6">
+                                    <img src="Imagens/blusa.png" alt="Foto da roupa"> <!--tirar depois-->
+                                </div>
+                                <div class="cell7">${stringDisponivel}</div>
+                            `;
+                            table.appendChild(row);
+
+                            if (roupa.disponivel){
+                                const buttonsCell = document.createElement('div');
+                                buttonsCell.className = 'buttonsCell';
+                                buttonsCell.innerHTML = `
+                                    <button id="editar" onclick="editarRoupas(${roupa.codigo})">EDITAR</button>
+                                    <button id="excluir" onclick="excluirRoupas(${roupa.codigo})">EXCLUIR</button>
+                                `;
+                                table.appendChild(buttonsCell);
+                            }
+                        });
+                    }      
                 })
-                .catch(error => console.error('Erro ao buscar roupas:', error));
+                .catch(error => {
+                    alert("Houve uma falha, tente novamente.")
+                });
         }
         
         function excluirRoupas(codigo) {
             const confirmar = confirm("Tem certeza de que deseja excluir esta roupa?");
 
             if (confirmar) {
-                fetch(`http://localhost:3000/roupa/excluirRoupas/${codigo}`, {
+                fetch(`http://localhost:3000/roupa/excluir/${codigo}`, {
                     method: 'DELETE' 
                 })
                 .then(response => {
@@ -86,10 +107,10 @@
                         throw new Error(`Erro ao excluir a roupa: ${response.status}`);
                     }
                     alert("Roupa excluída com sucesso!");
+                    window.location.reload();
                 })
                 .catch(error => {
-                    console.error('Erro ao excluir a roupa:', error);
-                    alert("Ocorreu um erro ao excluir a roupa.");
+                    alert("Houve uma falha, tente novamente.");
                 });
             } else {
                 console.log('Exclusão cancelada');
