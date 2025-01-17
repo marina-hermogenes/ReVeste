@@ -1,14 +1,15 @@
-import express from 'express'
-import roupaController from '../controllers/roupa.controller.js'
+import express from "express";
+import roupaController from "../controllers/roupa.controller.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.delete('/excluir/:codigo', roupaController.deleteRoupa);
-router.post('/cadastro', roupaController.createRoupa);
-router.get('/cadastradas/:codigo', roupaController.getRoupasCadastradas);
-router.get('/vendidas/:codigo', roupaController.getRoupasVendidas);
-router.get('/', roupaController.getAllRoupas);
-router.get('/buscar', roupaController.getRoupasPeloNome);
-router.get('/tipo', roupaController.getRoupasPeloTipo);
+router.delete("/excluir/:codigo", roupaController.deleteRoupa);
+router.post("/cadastro", roupaController.createRoupa);
+router.get("/cadastradas/:codigo", roupaController.getRoupasCadastradas);
+router.get("/vendidas/:codigo", roupaController.getRoupasVendidas);
+router.get("/", roupaController.getAllRoupas);
+router.get("/buscar", roupaController.getRoupasPeloNome);
+router.get("/tipo", roupaController.getRoupasPeloTipo);
+router.put("/editar/:codigo", roupaController.updateRoupa);
 
 export default router;
