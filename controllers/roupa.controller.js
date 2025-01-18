@@ -1,24 +1,32 @@
 import roupaServices from "../services/roupa.services.js";
 
 async function createRoupa(req, res) {
-  const { nome, descricao, tamanho, tipo, preco, foto, codigoUsuario } =
-    req.body;
+  const { nome, descricao, tamanho, tipo, preco, codigoUsuario, disponivel } = req.body;
+  const foto = req.file ? req.file.buffer : null;  //verificando se a foto foi enviada e pegando o buffer
 
   if (!nome || !tamanho || !tipo || !preco || !codigoUsuario) {
     return res.status(400).json({
       error: "Campos obrigatórios: nome, tamanho, tipo, preco e codigoUsuario.",
-    }); //lembrar de mudar depois que nós decidirmos a autenticaçao
+    });
   }
 
   try {
+    const precoConvertido = parseFloat(preco);
+    if (isNaN(precoConvertido) || precoConvertido <= 0) {
+      return res.status(400).json({ error: "Preço inválido." });
+    }
+
+    const disponivelConvertido = disponivel === 'true' ? true : false;
+
     const dados = await roupaServices.createRoupa({
       nome,
       descricao,
       tamanho,
       tipo,
-      preco,
-      foto,
+      preco: precoConvertido,
+      foto,  //envia o buffer da foto
       codigoUsuario,
+      disponivel: disponivelConvertido,
     });
     res.status(201).json(dados);
   } catch (error) {
