@@ -162,3 +162,38 @@ header {
     display: block; 
 }
 
+.barra-inferior {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    background-color: #DAFF3F;
+    justify-content: center;
+}
+
+.inner-barra-inferior {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.texto h2, .conjunto-texto p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+
+.texto h2 {
+    font-size: 20px;
+}
+
+.conjunto-texto p {
+    font-size: 12px;
+}
+
+.texto {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
