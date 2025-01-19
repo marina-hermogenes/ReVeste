@@ -1,0 +1,164 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    background-color: #4D00FF;
+    display: flex;
+    justify-content: center;
+}
+
+.inner_header {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo {
+    height: 45%;
+}
+
+#pesquisa, #cadastrar-roupa, #carrinho, #perfil {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.barra {
+    display: flex; 
+    align-items: center; 
+    position: relative; 
+    width: 400px; 
+    height: 30px; 
+    border: none;
+    border-radius: 20px; 
+}
+
+.barra input {
+    flex: 1; 
+    height: 100%; 
+    padding: 0px 15px; 
+    border: none; 
+    font-size: 14px; 
+    outline: none;
+    border-radius: 20px; 
+}
+
+.barra img {
+    position: absolute; 
+    right: 12px; 
+    height: 17px; 
+    cursor: pointer; 
+}
+
+#cadastrar-roupa, #perfil {
+    gap: 5px;
+}
+
+#cadastrar-roupa img, #perfil img, .menu img{
+    height: 20px;
+}
+
+#cadastrar-roupa h2, #perfil h2 {
+    color: #fff;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+}
+
+#carrinho img {
+    height: 25px;
+}
+
+.barra-horizontal {
+    display: flex;
+    height: 35px;
+    width: 100%;
+    justify-content: center;
+}
+
+.inner-barra-horizontal {
+    display: flex;
+    height: 100%;
+    width: 60%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#todas {
+    color: #30006B;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+}
+
+#categoria {
+    color: #5C5F61;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.imagem-inicial {
+    display: flex;
+}
+
+.imagem-inicial img {
+    width: 100%;
+}
+
+.imagem-inicial h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    width: 250px;
+    top: 30%;
+    left: 60px;
+}
+
+.imagem-inicial h1 span {
+    color: #DAFF3F
+}
+
+.menu {
+    position: relative; 
+}
+
+#menu-icon {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    right: 0; 
+    background-color: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: 200px; 
+}
+
+.dropdown-menu a {
+    display: block; 
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #000; 
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f4f4f4; 
+}
+
+.menu.open .dropdown-menu {
+    display: block; 
+}
+

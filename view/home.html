@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="home.css" media="screen" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="inner_header">
+            <img src="imagens/logo.png" id="logo">
+            <form id="pesquisa">
+                <div class="barra">
+                    <input type="text" placeholder="O que você está procurando?" />
+                    <img src="imagens/lupa.png" class="submit-icon" />
+                </div>
+            </form>
+            <a href="https://sig.ufla.br/modulos/login/index.php" id="carrinho">
+                <img src="imagens/carrinho-de-compras.png">
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php" id="perfil">
+                <img src="imagens/perfil.png">
+                <h2>Perfil</h2>
+            </a>
+            <div class="menu">
+                <img src="imagens/menu.png" id="menu-icon">
+                <div class="dropdown-menu">
+                    <a href="https://sig.ufla.br/modulos/login/index.php">Cadastrar roupa</a>
+                    <a href="http://localhost:3000/getRoupasCadastradas.html">Consultar roupas cadastradas</a>
+                    <a href="http://localhost:3000/getRoupasVendidas.html">Consultar roupas vendidas</a>
+                    <a href="https://sig.ufla.br/modulos/login/index.php">Consultar compras</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="barra-horizontal">
+        <div class="inner-barra-horizontal">
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="todas">TODAS AS PEÇAS</h3>
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="categoria">CALÇAS</h3>
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="categoria">CAMISAS</h3>
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="categoria">CALÇADOS</h3>
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="categoria">BERMUDAS</h3>
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="categoria">VESTIDOS</h3>
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="categoria">SHORTS</h3>
+            </a>
+            <a href="https://sig.ufla.br/modulos/login/index.php">
+                <h3 id="categoria">AGASALHOS</h3>
+            </a>
+        </div>
+    </div>
+    <div class="imagem-inicial">
+        <img src="imagens/imagem-home.png">
+        <h1>Achados únicos, feitos para <span>você</span></h1>
+    </div>
+
+    <script> //Abre o menu quando clica no botão e o fecha quando clica novamente
+        const menu = document.querySelector('.menu');
+        const menuIcon = document.querySelector('#menu-icon');
+    
+        menuIcon.addEventListener('click', () => {
+            const dropdownMenu = menu.querySelector('.dropdown-menu');
+            dropdownMenu.style.display = (dropdownMenu.style.display == 'block') ? 'none' : 'block';
+        });
+    
+        document.addEventListener('click', (event) => {
+            const dropdownMenu = menu.querySelector('.dropdown-menu');
+            if (!menu.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
