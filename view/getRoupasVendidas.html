@@ -50,11 +50,7 @@
                             if (roupa.descricao == null){
                                 roupa.descricao = ""
                             }
-                            if (roupa.foto == null){
-                                roupa.foto = ""
-                            } else {
-                                roupa.foto = `data:image/png;base64,${roupa.foto.toString('base64')}`;
-                            }
+
                             row.innerHTML = ``
                             row.innerHTML = `
                                 <div class="cell1">${roupa.nome}</div>
@@ -63,7 +59,7 @@
                                 <div class="cell4">${roupa.tipo}</div>
                                 <div class="cell5">R$${roupa.preco}</div>
                                 <div class="cell6">
-                                    <img src="Imagens/blusa.png" alt="Foto da roupa"> <!--tirar depois-->
+                                    <img src="${roupa.foto}" alt="Foto da roupa"> 
                                 </div>
                             `;
                             table.appendChild(row);
