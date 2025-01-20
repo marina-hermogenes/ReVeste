@@ -7,7 +7,7 @@ header {
     align-items: center;
 }
 
-header img {
+header img, header a{
     position: absolute;
     height: 35px;
 }
