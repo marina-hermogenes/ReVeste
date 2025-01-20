@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #FFFFFF;
+    color: #000;
+  }
+  
+  .header {
+    background-color: #4D00FF;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo {
+    height: 35px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .back-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .back-arrow {
+    font-size: 44px;
+    color: #000;
+    margin-right: 20px;
+    margin-left: 80px;
+    cursor: pointer;
+  } 
+  
+  .title {
+    font-size: 34px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .form-container {
+    width: 1100px;
+    height: 500px;
+    background-color: #DAFF3F;
+    border-radius: 20px;
+    padding: 60px;
+    display: flex;
+    gap: 50px;
+    margin: 0 auto;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .photo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .photo-placeholder {
+    width: 215px;
+    height: 215px;
+    background-color: #FFFFFF;
+    border: 1px solid #4D00FF;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .hidden-input {
+    display: none;
+  }
+  
+  .photo-button {
+    background-color: #4D00FF;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .photo-button:hover {
+    background-color: #3B00CC;
+  }
+  
+  .form-fields {
+    flex-grow: 1;
+  }
+  
+  .field-label {
+    display: block;
+    font-size: 18px;
+    color: #4D00FF;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #4D00FF;
+    margin-bottom: 20px;
+  }
+  
+  .small-fields {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .button-container {
+    text-align: right;
+  }
+  
+  .submit-button {
+    background-color: #4D00FF;
+    color: #FFFFFF;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #3B00CC;
+  }
+  
+  .description-field {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #4D00FF;
+    margin-bottom: 20px;
+    height: 40px; 
+    resize: none; 
+  }
+
+  .preco-field {
+    width: 100px; 
+    border-radius: 10px;
+    border: 1px solid #4D00FF;
+    margin-bottom: 20px;
+  }
+  
