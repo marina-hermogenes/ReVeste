@@ -79,7 +79,7 @@
                                 const buttonsCell = document.createElement('div');
                                 buttonsCell.className = 'buttonsCell';
                                 buttonsCell.innerHTML = `
-                                    <button id="editar" onclick="editarRoupas(${roupa.codigo})">EDITAR</button>
+                                    <button id="editar" onclick="window.location.href='editarRoupa.html?codigo=${roupa.codigo}'">EDITAR</button>
                                     <button id="excluir" onclick="excluirRoupas(${roupa.codigo})">EXCLUIR</button>
                                 `;
                                 table.appendChild(buttonsCell);

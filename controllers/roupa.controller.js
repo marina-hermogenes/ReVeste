@@ -111,8 +111,9 @@ async function getRoupasPeloTipo(req, res) {
 
 async function updateRoupa(req, res) {
   const codigo = req.params.codigo;
-  const { nome, descricao, tamanho, tipo, preco, foto, codigoUsuario } =
+  const { nome, descricao, tamanho, tipo, preco, codigoUsuario } =
     req.body;
+  const foto = req.file ? req.file.buffer : null;  //verificando se a foto foi enviada e pegando o buffer
 
   if (!codigo) {
     return res
@@ -142,6 +143,17 @@ async function updateRoupa(req, res) {
   }
 }
 
+//Funções auxiliares
+async function getRoupaPeloCod(req, res) {
+  const codigo = req.params.codigo;
+  const dados = await roupaServices.getRoupaPeloCod(codigo);
+  if (dados) {
+    res.status(201).json(dados);
+  } else {
+    res.status(500).json({ error: "Erro ao buscar roupa." });
+  }
+}
+
 export default {
   createRoupa,
   deleteRoupa,
@@ -151,4 +163,5 @@ export default {
   getRoupasPeloNome,
   getRoupasPeloTipo,
   updateRoupa,
+  getRoupaPeloCod
 };

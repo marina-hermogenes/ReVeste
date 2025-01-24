@@ -32,6 +32,10 @@ async function updateRoupa(roupa) {
   return await roupaRepository.updateRoupa(roupa);
 }
 
+async function getRoupaPeloCod(codigo) {
+  return await roupaRepository.getRoupaPeloCod(codigo);
+}
+
 export default {
   createRoupa,
   deleteRoupa,
@@ -40,5 +44,6 @@ export default {
   getAllRoupas,
   getRoupasPeloNome,
   getRoupasPeloTipo,
-  updateRoupa, // Adicione a função aqui
+  updateRoupa,
+  getRoupaPeloCod // Adicione a função aqui
 };

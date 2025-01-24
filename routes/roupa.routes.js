@@ -15,4 +15,7 @@ router.get("/buscar", roupaController.getRoupasPeloNome);
 router.get("/tipo", roupaController.getRoupasPeloTipo);
 router.put("/editar/:codigo", upload.single("foto"), roupaController.updateRoupa);
 
+//Funções auxiliares
+router.get("/buscaCodigo/:codigo", roupaController.getRoupaPeloCod);
+
 export default router;

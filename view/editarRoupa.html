@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastrar Roupa</title>
+  <title>Editar Roupa</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap">
-  <link rel="stylesheet" href="formularios.css">
+  <link rel="stylesheet" href="cadastrarRoupa.css">
 </head>
 <body>
   <header class="header">
@@ -14,13 +14,13 @@
   <div class="container">
     <div class="back-section">
       <span class="back-arrow" onclick="window.location.href='home.html'">&lt;</span>
-      <h1 class="title">Cadastrar produto</h1>
+      <h1 class="title">Editar produto</h1>
     </div>
     <div class="form-container">
       <div class="photo-section">
         <div class="photo-placeholder" id="photoPreview"></div>
         <input type="file" id="foto" name="foto" accept="image/*" class="hidden-input">
-        <button class="photo-button" id="adicionarFotoBtn">Adicionar foto do produto</button>
+        <button class="photo-button" id="adicionarFotoBtn">Alterar foto do produto</button>
       </div>
       <div class="form-fields">
         <form id="cadastroRoupaForm" enctype="multipart/form-data">
@@ -50,12 +50,13 @@
                 <option value="Calçados">Calçados</option>
                 <option value="Bermudas">Bermudas</option>
                 <option value="Vestidos">Vestidos</option>
+                <option value="Agasalhos">Agasalhos</option>
               </select>
             </div>
           </div>
 
           <div class="button-container">
-            <button type="submit" class="submit-button">Cadastrar produto</button>
+            <button type="submit" class="submit-button">Editar produto</button>
           </div>
         </form>
       </div>
@@ -88,16 +89,17 @@
 
       const formData = new FormData(form);
       formData.append('foto', document.getElementById('foto').files[0]);
+      const codigo = getCodigoFromURL();
 
       try {
-        const response = await fetch('http://localhost:3000/roupa/cadastro', {
-          method: 'POST',
+        const response = await fetch(`http://localhost:3000/roupa/editar/${codigo}`, {
+          method: 'PUT',
           body: formData,
         });
 
         if (response.ok) {
           const result = await response.json();
-          alert('Roupa cadastrada com sucesso!');
+          alert('Roupa editada com sucesso!');
           console.log(result);
         } else {
           const error = await response.json();
@@ -108,6 +110,45 @@
         console.error(error);
       }
     });
+
+function getCodigoFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('codigo');
+}
+
+async function carregarDadosRoupa() {
+  const codigo = getCodigoFromURL();
+
+  try {
+    const response = await fetch(`http://localhost:3000/roupa/buscaCodigo/${codigo}`);
+    if (!response.ok) {
+      throw new Error('Erro ao buscar os dados da roupa.');
+    }
+
+    const data = await response.json(); 
+    const roupa = data[0]; 
+    console.log(roupa)
+
+    document.getElementById('nome').value = roupa.nome;
+    document.getElementById('preco').value = roupa.preco;
+    document.getElementById('descricao').value = roupa.descricao;
+    document.getElementById('codigoUsuario').value = roupa.codigousuario;
+    document.getElementById('tamanho').value = roupa.tamanho;
+    document.getElementById('tipo').value = roupa.tipo;
+
+    const photoPreview = document.getElementById('photoPreview');
+    if (roupa.foto) {
+      photoPreview.style.backgroundImage = `url(${roupa.foto})`;
+      photoPreview.style.backgroundSize = 'cover';
+      photoPreview.style.backgroundPosition = 'center';
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Erro ao carregar os dados da roupa.');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', carregarDadosRoupa);
   </script>
 </body>
 </html>

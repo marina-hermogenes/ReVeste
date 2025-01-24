@@ -56,17 +56,6 @@ async function deleteRoupa(codigo) {
   return dados;
 }
 
-function pegarAssinatura(foto){ //Verifica se a imagem é png ou jpeg para converter para base64
-  const assinatura = foto.toString('hex', 0, 4);
-  if (assinatura == '89504e47'){
-    return 'image/png';
-  } else if (assinatura == 'ffd8ffe0' || assinatura == 'ffd8ffe1' || assinatura == 'ffd8ffe2') {
-    return 'image/jpeg';
-  } else {
-    return 'application/octet-stream';
-  }
-}
-
 async function getRoupasCadastradas(codigo) {
   const conn = await bd.conectar();
   let dados = null;
@@ -223,6 +212,42 @@ async function updateRoupa(roupa) {
   return dados;
 }
 
+//Funções auxiliares
+function pegarAssinatura(foto){ //Verifica se a imagem é png ou jpeg para converter para base64
+  const assinatura = foto.toString('hex', 0, 4);
+  if (assinatura == '89504e47'){
+    return 'image/png';
+  } else if (assinatura == 'ffd8ffe0' || assinatura == 'ffd8ffe1' || assinatura == 'ffd8ffe2') {
+    return 'image/jpeg';
+  } else {
+    return 'application/octet-stream';
+  }
+}
+
+async function getRoupaPeloCod(codigo) {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "select * from roupa where codigo=$1";
+    const result = await conn.query(query, [codigo]);
+    dados = result.rows;
+    dados = dados.map(roupa => {
+      if (roupa.foto) {
+        const mimeType = pegarAssinatura(roupa.foto);
+        roupa.foto = `data:${mimeType};base64,${roupa.foto.toString('base64')}`;
+      } else {
+        roupa.foto = "Imagens/semFoto.png";  
+      }
+      return roupa;
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
 export default {
   createRoupa,
   deleteRoupa,
@@ -232,4 +257,5 @@ export default {
   getRoupasPeloNome,
   getRoupasPeloTipo,
   updateRoupa,
+  getRoupaPeloCod
 };
