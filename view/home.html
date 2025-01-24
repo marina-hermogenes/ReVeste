@@ -36,6 +36,7 @@
             </div>
         </div>
     </header>
+
     <div class="barra-horizontal">
         <div class="inner-barra-horizontal">
             <a href="https://sig.ufla.br/modulos/login/index.php">
@@ -64,10 +65,12 @@
             </a>
         </div>
     </div>
+
     <div class="imagem-inicial">
         <img src="imagens/imagem-home.png">
         <h1>Achados únicos, feitos para <span>você</span></h1>
     </div>
+
     <div class="barra-inferior">
         <div class="inner-barra-inferior">
             <img src="Imagens/logo-inferior.png">
@@ -99,21 +102,33 @@
         </div>
     </div>
 
-    <script> //Abre o menu quando clica no botão e o fecha quando clica novamente
+    <script>
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
         const menu = document.querySelector('.menu');
         const menuIcon = document.querySelector('#menu-icon');
-    
+
         menuIcon.addEventListener('click', () => {
             const dropdownMenu = menu.querySelector('.dropdown-menu');
             dropdownMenu.style.display = (dropdownMenu.style.display == 'block') ? 'none' : 'block';
         });
-    
+
         document.addEventListener('click', (event) => {
             const dropdownMenu = menu.querySelector('.dropdown-menu');
             if (!menu.contains(event.target)) {
                 dropdownMenu.style.display = 'none';
             }
         });
+
+        //logout
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>
