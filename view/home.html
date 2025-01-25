@@ -7,6 +7,42 @@
     <link rel="stylesheet" type="text/css" href="home.css" media="screen" />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        /*CSS para formatar os cards de roupas */
+        #lista-roupas {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+            margin: 4px 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -36,30 +72,21 @@
 
     <div class="barra-horizontal">
         <div class="inner-barra-horizontal">
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="todas">TODAS AS PEÇAS</h3>
-            </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="categoria">CALÇAS</h3>
-            </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="categoria">CAMISAS</h3>
-            </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="categoria">CALÇADOS</h3>
-            </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="categoria">BERMUDAS</h3>
-            </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="categoria">VESTIDOS</h3>
-            </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="categoria">SHORTS</h3>
-            </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php">
-                <h3 id="categoria">AGASALHOS</h3>
-            </a>
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupas()">TODAS AS PEÇAS</a>
+    
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupasPorTipo('Calça')">CALÇAS</a>
+
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupasPorTipo('Camisas')">CAMISAS</a>
+
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupasPorTipo('Calçados')">CALÇADOS</a>
+
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupasPorTipo('Bermudas')">BERMUDAS</a>
+
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupasPorTipo('Vestidos')">VESTIDOS</a>
+
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupasPorTipo('Shorts')">SHORTS</a>
+
+            <a href="javascript:void(0);" class="categoria-item" onclick="carregarRoupasPorTipo('Agasalhos')">AGASALHOS</a>
         </div>
     </div>
 
@@ -67,6 +94,8 @@
         <img src="imagens/imagem-home.png">
         <h1>Achados únicos, feitos para <span>você</span></h1>
     </div>
+
+    <div id="lista-roupas" class="container"></div>
 
     <div class="barra-inferior">
         <div class="inner-barra-inferior">
@@ -100,18 +129,95 @@
     </div>
 
     <script>
-        const token = localStorage.getItem('token');
+        const API_URL = "http://localhost:3000/roupa";
 
+        // Função para carregar roupas de um tipo específico
+        async function carregarRoupasPorTipo(tipo) {
+            try {
+                let url;
+                if (tipo === 'Calça') {
+                    url = 'http://localhost:3000/roupa/calcas';  // Rota específica para Calças
+                }
+                else if (tipo === 'Camisas') {
+                    url = 'http://localhost:3000/roupa/camisas';  // Rota específica para Camisas
+                }
+                else if (tipo === 'Calçados') {
+                    url = 'http://localhost:3000/roupa/calcados';  // Rota específica para Calçados
+                }
+                else if (tipo === 'Bermudas') {
+                    url = 'http://localhost:3000/roupa/bermudas';  // Rota específica para Bermudas
+                }
+                else if (tipo === 'Vestidos') {
+                    url = 'http://localhost:3000/roupa/vestidos';  // Rota específica para Vestidos
+                }
+                else if (tipo === 'Shorts') {
+                    url = 'http://localhost:3000/roupa/shorts';  // Rota específica para Shorts
+                }
+                else if (tipo === 'Agasalhos') {
+                    url = 'http://localhost:3000/roupa/agasalhos';  // Rota específica para Agasalhos
+                }
+                else {
+                    url = 'http://localhost:3000/roupa';  // Rota para todas as roupas
+                }
+
+
+
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar roupas de tipo específico');
+                }
+
+                const roupas = await response.json();
+                exibirRoupas(roupas);  // Atualizando a exibição na tela
+            } catch (error) {
+                console.error("Erro ao carregar roupas:", error);
+            }
+        }
+
+
+        async function carregarRoupas() {
+            try {
+                const response = await fetch(API_URL, {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar as roupas');
+                }
+                const roupas = await response.json();
+                exibirRoupas(roupas);
+            } catch (error) {
+                console.error("Erro ao carregar roupas:", error);
+            }
+        }
+
+        function exibirRoupas(roupas) {
+            const container = document.getElementById("lista-roupas");
+            container.innerHTML = roupas.map(roupa => `
+                <div class="card">
+                    <img src="${roupa.foto || 'imagens/default.jpg'}" alt="Foto da ${roupa.nome}" />
+                    <h3>${roupa.nome}</h3>
+                    <p><strong>Descrição:</strong> ${roupa.descricao || "Sem descrição"}</p>
+                    <p><strong>Tamanho:</strong> ${roupa.tamanho}</p>
+                    <p><strong>Preço:</strong> R$ ${Number(roupa.preco).toFixed(2)}</p>
+                </div>
+            `).join("");
+        }
+
+        const token = localStorage.getItem('token');
         if (!token) {
             window.location.href = 'login.html';
+        } else {
+            carregarRoupas();
         }
 
         const menu = document.querySelector('.menu');
         const menuIcon = document.querySelector('#menu-icon');
-
         menuIcon.addEventListener('click', () => {
             const dropdownMenu = menu.querySelector('.dropdown-menu');
-            dropdownMenu.style.display = (dropdownMenu.style.display == 'block') ? 'none' : 'block';
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
 
         document.addEventListener('click', (event) => {
@@ -121,7 +227,6 @@
             }
         });
 
-        //logout
         function logout() {
             localStorage.removeItem('token');
             window.location.href = 'login.html';

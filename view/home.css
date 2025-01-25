@@ -92,7 +92,7 @@ header {
 }
 
 #todas {
-    color: #30006B;
+    color: #5C5F61;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 16px;
 }
@@ -197,3 +197,6 @@ header {
     gap: 10px;
 }
 
+.barra-horizontal, .barra-horizontal * {
+    font-family: 'Source Sans Pro', sans-serif;
+}

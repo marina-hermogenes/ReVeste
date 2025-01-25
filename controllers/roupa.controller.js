@@ -67,45 +67,81 @@ async function getRoupasVendidas(req, res) {
 
 async function getAllRoupas(req, res) {
   try {
-    const dados = await roupaServices.getAllRoupas();
-    res.status(200).json(dados);
+    const roupas = await roupaServices.getAllRoupas();
+    res.status(200).json(roupas);
   } catch (error) {
-    console.error("Erro ao consultar todas as roupas:", error);
-    res.status(500).json({ error: "Erro ao consultar todas as roupas." });
+    console.error("Erro ao buscar todas as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar todas as roupas." });
   }
 }
 
-async function getRoupasPeloNome(req, res) {
-  const { nome } = req.query;
-  if (!nome) {
-    return res
-      .status(400)
-      .json({ error: "O campo 'nome' é obrigatório para busca." });
-  }
-
+async function getCalcas(req, res) { //funcao pra pegar as calças
   try {
-    const dados = await roupaServices.getRoupasPeloNome(nome);
-    res.status(200).json(dados);
+    const roupas = await roupaServices.getCalcas();
+    res.status(200).json(roupas);
   } catch (error) {
-    console.error("Erro ao buscar roupas pelo nome:", error);
-    res.status(500).json({ error: "Erro ao buscar roupas pelo nome." });
+    console.error("Erro ao buscar as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar as calças." });
   }
 }
 
-async function getRoupasPeloTipo(req, res) {
-  const { tipo } = req.query;
-  if (!tipo) {
-    return res
-      .status(400)
-      .json({ error: "O campo 'tipo' é obrigatório para busca." });
-  }
-
+async function getCamisas(req, res) { //funcao pra pegar as camisas
   try {
-    const dados = await roupaServices.getRoupasPeloTipo(tipo);
-    res.status(200).json(dados);
+    const roupas = await roupaServices.getCamisas();
+    res.status(200).json(roupas);
   } catch (error) {
-    console.error("Erro ao buscar roupas pelo tipo:", error);
-    res.status(500).json({ error: "Erro ao buscar roupas pelo tipo." });
+    console.error("Erro ao buscar as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar as camisas." });
+  }
+}
+
+async function getCalcados(req, res) { //funcao pra pegar os calçados
+  try {
+    const roupas = await roupaServices.getCalcados();
+    res.status(200).json(roupas);
+  } catch (error) {
+    console.error("Erro ao buscar as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar os calçados." });
+  }
+}
+
+async function getBermudas(req, res) { //funcao pra pegar as bermudas
+  try {
+    const roupas = await roupaServices.getBermudas();
+    res.status(200).json(roupas);
+  } catch (error) {
+    console.error("Erro ao buscar as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar os bermudas." });
+  }
+}
+
+async function getVestidos(req, res) { //funcao pra pegar os vestidos
+  try {
+    const roupas = await roupaServices.getVestidos();
+    res.status(200).json(roupas);
+  } catch (error) {
+    console.error("Erro ao buscar as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar os vestidos." });
+  }
+}
+
+async function getShorts(req, res) { //funcao pra pegar os shorts
+  try {
+    const roupas = await roupaServices.getShorts();
+    res.status(200).json(roupas);
+  } catch (error) {
+    console.error("Erro ao buscar as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar os shorts." });
+  }
+}
+
+async function getAgasalhos(req, res) { //funcao pra pegar as agasalhos
+  try {
+    const roupas = await roupaServices.getAgasalhos();
+    res.status(200).json(roupas);
+  } catch (error) {
+    console.error("Erro ao buscar as roupas:", error);
+    res.status(500).json({ error: "Erro ao buscar os agasalhos." });
   }
 }
 
@@ -159,8 +195,13 @@ export default {
   getRoupasCadastradas,
   getRoupasVendidas,
   getAllRoupas,
-  getRoupasPeloNome,
-  getRoupasPeloTipo,
   updateRoupa,
-  getRoupaPeloCod
+  getRoupaPeloCod,
+  getCalcas, //
+  getCamisas, //
+  getCalcados, //
+  getBermudas, //
+  getVestidos, //
+  getShorts, //
+  getAgasalhos //
 };

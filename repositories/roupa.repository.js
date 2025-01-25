@@ -104,6 +104,179 @@ async function getRoupasVendidas(codigo) {
   return dados;
 }
 
+async function getCalcas() {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "SELECT * FROM roupa WHERE tipo = 'Calças';";
+    const result = await conn.query(query);
+    dados = result.rows;
+
+    dados.map((roupa) => {
+      if (roupa.foto) {
+        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString(
+          "base64"
+        )}`;
+      }
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
+//---------------------------------------------------------------------------------------
+
+async function getCamisas() {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "SELECT * FROM roupa WHERE tipo = 'Camisas';";
+    const result = await conn.query(query);
+    dados = result.rows;
+
+    dados.map((roupa) => {
+      if (roupa.foto) {
+        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString(
+          "base64"
+        )}`;
+      }
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
+
+//-------------------------------------------------------------------------------------
+async function getCalcados() {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "SELECT * FROM roupa WHERE tipo = 'Calçados';";
+    const result = await conn.query(query);
+    dados = result.rows;
+
+    dados.map((roupa) => {
+      if (roupa.foto) {
+        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString(
+          "base64"
+        )}`;
+      }
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
+//---------------------------------------------------------------------------------------
+
+async function getBermudas() {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "SELECT * FROM roupa WHERE tipo = 'Bermudas';";
+    const result = await conn.query(query);
+    dados = result.rows;
+
+    dados.map((roupa) => {
+      if (roupa.foto) {
+        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString(
+          "base64"
+        )}`;
+      }
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
+//--------------------------------------------------------------------------------------
+async function getVestidos() {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "SELECT * FROM roupa WHERE tipo = 'Vestidos';";
+    const result = await conn.query(query);
+    dados = result.rows;
+
+    dados.map((roupa) => {
+      if (roupa.foto) {
+        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString(
+          "base64"
+        )}`;
+      }
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
+//-------------------------------------------------------------------------------------
+
+async function getShorts() {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "SELECT * FROM roupa WHERE tipo = 'Shorts';";
+    const result = await conn.query(query);
+    dados = result.rows;
+
+    dados.map((roupa) => {
+      if (roupa.foto) {
+        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString(
+          "base64"
+        )}`;
+      }
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
+//-----------------------------------------------------------------------------------------
+
+async function getAgasalhos() {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = "SELECT * FROM roupa WHERE tipo = 'Agasalhos';";
+    const result = await conn.query(query);
+    dados = result.rows;
+
+    dados.map((roupa) => {
+      if (roupa.foto) {
+        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString(
+          "base64"
+        )}`;
+      }
+    });
+  } catch (erro) {
+    console.error(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
+
 async function getAllRoupas() {
   const conn = await bd.conectar();
   let dados = null;
@@ -124,54 +297,6 @@ async function getAllRoupas() {
   } finally {
     conn.release();
   }
-  return dados;
-}
-
-async function getRoupasPeloNome(nome) {
-  const conn = await bd.conectar();
-  let dados = null;
-
-  try {
-    const query = "select * from roupa where nome ILIKE $1;";
-    const values = [`%${nome}%`];
-    const result = await conn.query(query, values);
-    dados = result.rows;
-
-    dados.map((roupa) => {
-      if (roupa.foto) {
-        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString("base64")}`;
-      }
-    });
-  } catch (erro) {
-    console.error(erro);
-  } finally {
-    conn.release();
-  }
-
-  return dados;
-}
-
-async function getRoupasPeloTipo(tipo) {
-  const conn = await bd.conectar();
-  let dados = null;
-
-  try {
-    const query = "select * from roupa where tipo ILIKE $1;";
-    const values = [`%${tipo}%`];
-    const result = await conn.query(query, values);
-    dados = result.rows;
-
-    dados.map((roupa) => {
-      if (roupa.foto) {
-        roupa.foto = `data:image/png;base64,${Buffer.from(roupa.foto).toString("base64")}`;
-      }
-    });
-  } catch (erro) {
-    console.error(erro);
-  } finally {
-    conn.release();
-  }
-
   return dados;
 }
 
@@ -252,8 +377,13 @@ export default {
   getRoupasCadastradas,
   getRoupasVendidas,
   getAllRoupas,
-  getRoupasPeloNome,
-  getRoupasPeloTipo,
   updateRoupa,
-  getRoupaPeloCod
+  getRoupaPeloCod,
+  getCalcas, //
+  getCamisas, //
+  getCalcados, //
+  getBermudas, //
+  getVestidos, //
+  getShorts, //
+  getAgasalhos //
 };

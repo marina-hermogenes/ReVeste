@@ -20,12 +20,32 @@ async function getAllRoupas() {
   return await roupaRepository.getAllRoupas();
 }
 
-async function getRoupasPeloNome(nome) {
-  return await roupaRepository.getRoupasPeloNome(nome);
+async function getCalcas() {
+  return await roupaRepository.getCalcas();
 }
 
-async function getRoupasPeloTipo(tipo) {
-  return await roupaRepository.getRoupasPeloTipo(tipo);
+async function getCamisas() {
+  return await roupaRepository.getCamisas();
+}
+
+async function getCalcados() {
+  return await roupaRepository.getCalcados();
+}
+
+async function getBermudas() {
+  return await roupaRepository.getBermudas();
+}
+
+async function getVestidos() {
+  return await roupaRepository.getVestidos();
+}
+
+async function getShorts() {
+  return await roupaRepository.getShorts();
+}
+
+async function getAgasalhos() {
+  return await roupaRepository.getAgasalhos();
 }
 
 async function updateRoupa(roupa) {
@@ -42,8 +62,13 @@ export default {
   getRoupasCadastradas,
   getRoupasVendidas,
   getAllRoupas,
-  getRoupasPeloNome,
-  getRoupasPeloTipo,
   updateRoupa,
-  getRoupaPeloCod // Adicione a função aqui
+  getRoupaPeloCod,
+  getCalcas, //
+  getCamisas, //
+  getCalcados, //
+  getBermudas, //
+  getVestidos, //
+  getShorts, //
+  getAgasalhos //
 };
