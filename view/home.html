@@ -27,12 +27,8 @@
             </a>
             <div class="menu">
                 <img src="imagens/menu.png" id="menu-icon">
-                <div class="dropdown-menu">
-                    <a href="http://localhost:3000/cadastrarRoupa.html">Cadastrar roupa</a>
-                    <a href="http://localhost:3000/getRoupasCadastradas.html">Consultar roupas cadastradas</a>
-                    <a href="http://localhost:3000/getRoupasVendidas.html">Consultar roupas vendidas</a>
-                    <a href="https://sig.ufla.br/modulos/login/index.php">Consultar compras</a>
-                    <a href="javascript:void(0);" onclick="logout()">Sair</a>
+                <div class="dropdown-menu" id="menu-opcoes">
+                    
                 </div>
             </div>
         </div>
@@ -130,6 +126,95 @@
             localStorage.removeItem('token');
             window.location.href = 'login.html';
         }
+
+        async function verificarChavePix(codigo) {
+            try {
+                const response = await fetch(`http://localhost:3000/usuario/${codigo}`);
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                return data[0].chavepix != null && data[0].chavepix !== "";
+            } catch (error) {
+                console.error("Erro ao verificar chave Pix:", error);
+                return false; 
+            }
+        }
+
+        async function verificarEnderecos(codigo) {
+            try {
+                const response = await fetch(`http://localhost:3000/endereco/${codigo}`);
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                return data.length != 0;
+            } catch (error) {
+                console.error("Erro ao verificar endereços:", error);
+                return false; 
+            }
+        }
+
+        async function configurarMenu() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+            }
+
+            const tokenPayload = parseJWT(token);
+            const codigo = tokenPayload?.userId;
+
+            if (!codigo) {
+                alert('Não foi possível identificar o usuário autenticado.');
+                return;
+            }
+
+            const temChavePix = await verificarChavePix(codigo);
+            const temEndereco = await verificarEnderecos(codigo);
+
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+
+            if (temChavePix) {
+                dropdownMenu.innerHTML += `
+                    <a href="http://localhost:3000/cadastrarRoupa.html">Cadastrar roupa</a>
+                    <a href="http://localhost:3000/getRoupasCadastradas.html">Consultar roupas cadastradas</a>
+                    <a href="http://localhost:3000/getRoupasVendidas.html">Consultar roupas vendidas</a>
+                `;
+            } 
+
+            if (temEndereco) {
+                dropdownMenu.innerHTML += `
+                    <a href="https://sig.ufla.br/modulos/login/index.php">Consultar compras</a>
+                `;
+            } 
+
+            dropdownMenu.innerHTML += `
+                <a href="javascript:void(0);" onclick="logout()">Sair</a>
+            `
+        }
+    
+
+    function parseJWT(token) {
+        if (!token) return null;
+
+        // Decodifica o payload (segunda parte do JWT)
+        const base64Url = token.split('.')[1];
+        if (!base64Url) return null;
+
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split('')
+                .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
+                .join('')
+        );
+
+        return JSON.parse(jsonPayload); // Retorna o payload como um objeto
+    }
+
+    // Executa a configuração do menu ao carregar a página
+    document.addEventListener('DOMContentLoaded', configurarMenu);
+
     </script>
 </body>
 </html>

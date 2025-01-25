@@ -37,13 +37,14 @@
             console.log(tokenPayload);
 
             const codigo = tokenPayload?.userId 
+
             if (!codigo) {
                 alert('Não foi possível identificar o usuário autenticado.');
                 return;
             }
-            fetch(`http://localhost:3000/roupa/cadastradas/${codigo}`)
+            fetch(`http://localhost:3000/roupa/cadastradas/${codigo}`, )
+            
                 .then(response => {
-                    console.log(`Resposta HTTP recebida: ${response.status}`);
                     if (!response.ok) {
                         throw new Error(`Erro HTTP: ${response.status}`);
                     }
@@ -141,6 +142,21 @@
             } else {
                 console.log('Exclusão cancelada');
             }
+        }
+
+
+        function verificarChavePix(codigo) {
+            fetch(`http://localhost:3000/usuario/${codigo}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erro ao excluir a roupa: ${response.status}`);
+                    }
+                    alert("Roupa excluída com sucesso!");
+                    window.location.reload();
+                })
+                .catch(error => {
+                    alert("Houve uma falha, tente novamente.");
+                });
         }
 
     </script>

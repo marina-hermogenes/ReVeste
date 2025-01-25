@@ -84,14 +84,14 @@ button {
     color: #4D00FF;
 }
 
-.erro {
+.erro, .sem-chave {
     display: flex;
     width: 100%;
     justify-content: center;
     padding-top: 20px;
 }
 
-.erro h1 {
+.erro h1, .sem-chave h1{
     font-family: 'Source Sans Pro', sans-serif;
 }
 
