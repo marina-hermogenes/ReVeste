@@ -187,9 +187,8 @@ async function updateRoupa(roupa) {
                 tamanho = $3,
                 tipo = $4,
                 preco = $5,
-                foto = $6,
-                codigoUsuario = $7
-            WHERE codigo = $8
+                foto = COALESCE($6, foto)
+            WHERE codigo = $7
             RETURNING *;
         `;
     const values = [
@@ -198,8 +197,7 @@ async function updateRoupa(roupa) {
       roupa.tamanho,
       roupa.tipo,
       roupa.preco,
-      roupa.foto || null,
-      roupa.codigoUsuario,
+      roupa.foto,
       roupa.codigo,
     ];
     const result = await conn.query(query, values);

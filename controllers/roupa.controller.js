@@ -111,7 +111,7 @@ async function getRoupasPeloTipo(req, res) {
 
 async function updateRoupa(req, res) {
   const codigo = req.params.codigo;
-  const { nome, descricao, tamanho, tipo, preco, codigoUsuario } =
+  const { nome, descricao, tamanho, tipo, preco } =
     req.body;
   const foto = req.file ? req.file.buffer : null;  //verificando se a foto foi enviada e pegando o buffer
 
@@ -130,7 +130,6 @@ async function updateRoupa(req, res) {
       tipo,
       preco,
       foto,
-      codigoUsuario,
     });
     if (dados) {
       res.status(200).json(dados);
