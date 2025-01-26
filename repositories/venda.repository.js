@@ -5,7 +5,7 @@ async function getVenda(codigo) {
     let dados = null;
     try {
       const query = await conn.query(
-          'select venda.codigo, roupa.nome, roupa.foto, endereco.bairro, endereco.numero, endereco.cidade, endereco.estado, venda.horario, venda.mensagem from venda, endereco, roupa where venda.codigoUsuario=$1 and endereco.codigo = venda.codigoEndereco and roupa.codigoVenda = venda.codigo',
+          'select venda.codigo, roupa.nome, roupa.foto, endereco.bairro, endereco.numero, endereco.cidade, endereco.estado, venda.horario, venda.mensagem from venda, endereco, roupa where venda.codigoUsuario=$1 and endereco.codigo = venda.codigoEndereco and roupa.codigoVenda = venda.codigo order by venda.horario desc',
           [codigo]
         );
       console.log(query.rows);
@@ -27,6 +27,28 @@ async function getVenda(codigo) {
     return dados;
 }
 
+async function deleteVenda(codigo) {
+    const conn = await bd.conectar();
+    let dados = null;
+    try {
+      await conn.query(
+          'UPDATE roupa SET disponivel = true, codigoVenda = null WHERE codigoVenda = $1',
+          [codigo]
+        );
+        const query = await conn.query(
+          'DELETE FROM venda WHERE codigo = $1 RETURNING *',
+          [codigo]
+        );
+      console.log(query.rows);
+      dados = query.rows;
+    } catch (erro) {
+      console.log(erro);
+    } finally {
+      conn.release();
+    }
+    return dados;
+  }
+
 function pegarAssinatura(foto){ //Verifica se a imagem é png ou jpeg para converter para base64
     const assinatura = foto.toString('hex', 0, 4);
     if (assinatura == '89504e47'){
@@ -39,5 +61,5 @@ function pegarAssinatura(foto){ //Verifica se a imagem é png ou jpeg para conve
 }
   
 export default {
-    getVenda
+    getVenda, deleteVenda
 };

@@ -148,7 +148,7 @@
         }
 
         function cancelarVenda(codigo) {
-            const confirmar = confirm("Tem certeza de que deseja cancelar essa venda?");
+            const confirmar = confirm("Tem certeza de que deseja cancelar essa Compra?");
 
             if (confirmar) {
                 fetch(`http://localhost:3000/venda/cancelar/${codigo}`, {
@@ -156,9 +156,9 @@
                 })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error(`Erro ao cancelar venda: ${response.status}`);
+                        throw new Error(`Erro ao cancelar compra: ${response.status}`);
                     }
-                    alert("Venda cancelada com sucesso!");
+                    alert("Compra cancelada com sucesso!");
                     window.location.reload();
                 })
                 .catch(error => {

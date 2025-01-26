@@ -10,7 +10,17 @@ async function getVenda(req, res) {
     }
 }
 
+async function deleteVenda(req, res) {
+    const codigo = req.params.codigo;
+    const dados = await vendaServices.deleteVenda(codigo);
+    if (dados) {
+      res.status(201).json(dados);
+    } else {
+      res.status(500).json({ error: "Erro ao cancelar venda." });
+    }
+  }
+
 export default {
-    getVenda
+    getVenda, deleteVenda
 };
 
