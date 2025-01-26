@@ -213,7 +213,15 @@
             }
         }
 
-        function exibirRoupas(roupas) {
+        async function exibirRoupas(roupas) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+            }
+            const tokenPayload = parseJWT(token);
+            const codigo = tokenPayload?.userId;
+            const temEndereco = await verificarEnderecos(codigo);
+
             const container = document.getElementById("lista-roupas");
             container.innerHTML = roupas.map(roupa => `
                 <div class="card">
@@ -224,7 +232,7 @@
                     <p><strong>Tamanho:</strong> ${roupa.tamanho}</p>
                     <p><strong>Tipo:</strong> ${roupa.tipo}</p>
                     <!-- Adicionando o botão -->
-                    <button class="adicionar-carrinho">Adicionar ao Carrinho</button>
+                    ${temEndereco ? '<button class="adicionar-carrinho">Adicionar ao Carrinho</button>' : ''}
                 </div>
             `).join("");
         }
