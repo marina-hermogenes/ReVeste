@@ -23,6 +23,7 @@
             text-align: center;
             background-color: #f9f9f9;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
         }
 
         .card img {
@@ -33,15 +34,34 @@
 
         .card h3 {
             font-size: 18px;
+            font-family: 'Source Sans Pro',sans-serif;
             color: #333;
             margin-bottom: 8px;
         }
 
         .card p {
             font-size: 14px;
+            font-family: 'Source Sans Pro',sans-serif;
             color: #555;
             margin: 4px 0;
         }
+
+        .adicionar-carrinho {
+            background-color: #4d00ff; /* Cor roxa */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Source Sans Pro',sans-serif;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .adicionar-carrinho:hover {
+            background-color: #6a1b9a; /* Cor roxa mais clara para o hover */
+        }
+
     </style>
 </head>
 <body>
@@ -197,11 +217,14 @@
             const container = document.getElementById("lista-roupas");
             container.innerHTML = roupas.map(roupa => `
                 <div class="card">
-                    <img src="${roupa.foto || 'imagens/default.jpg'}" alt="Foto da ${roupa.nome}" />
+                    <img src="${roupa.foto || 'imagens/default-placeholder.png'}" alt="Foto da ${roupa.nome}" />
                     <h3>${roupa.nome}</h3>
-                    <p><strong>Descrição:</strong> ${roupa.descricao || "Sem descrição"}</p>
-                    <p><strong>Tamanho:</strong> ${roupa.tamanho}</p>
                     <p><strong>Preço:</strong> R$ ${Number(roupa.preco).toFixed(2)}</p>
+                    <p><strong>Descrição:</strong> ${roupa.descricao}</p>
+                    <p><strong>Tamanho:</strong> ${roupa.tamanho}</p>
+                    <p><strong>Tipo:</strong> ${roupa.tipo}</p>
+                    <!-- Adicionando o botão -->
+                    <button class="adicionar-carrinho">Adicionar ao Carrinho</button>
                 </div>
             `).join("");
         }
