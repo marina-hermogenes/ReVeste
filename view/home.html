@@ -74,10 +74,10 @@
                     <img src="imagens/lupa.png" class="submit-icon" />
                 </div>
             </form>
-            <a href="https://sig.ufla.br/modulos/login/index.php" id="carrinho">
+            <a href="" id="carrinho">
                 <img src="imagens/carrinho-de-compras.png">
             </a>
-            <a href="https://sig.ufla.br/modulos/login/index.php" id="perfil">
+            <a href="" id="perfil">
                 <img src="imagens/perfil.png">
                 <h2>Perfil</h2>
             </a>
@@ -223,7 +223,8 @@
             const temEndereco = await verificarEnderecos(codigo);
 
             const container = document.getElementById("lista-roupas");
-            container.innerHTML = roupas.map(roupa => `
+            const roupasDisponiveis = roupas.filter(roupa => roupa.disponivel);
+            container.innerHTML = roupasDisponiveis.map(roupa => `
                 <div class="card">
                     <img src="${roupa.foto || 'imagens/default-placeholder.png'}" alt="Foto da ${roupa.nome}" />
                     <h3>${roupa.nome}</h3>
@@ -320,7 +321,7 @@
 
             if (temEndereco) {
                 dropdownMenu.innerHTML += `
-                    <a href="https://sig.ufla.br/modulos/login/index.php">Consultar compras</a>
+                    <a href="http://localhost:3000/getVenda.html">Consultar compras</a>
                 `;
             } 
 
@@ -333,7 +334,6 @@
     function parseJWT(token) {
         if (!token) return null;
 
-        // Decodifica o payload (segunda parte do JWT)
         const base64Url = token.split('.')[1];
         if (!base64Url) return null;
 
@@ -345,10 +345,9 @@
                 .join('')
         );
 
-        return JSON.parse(jsonPayload); // Retorna o payload como um objeto
+        return JSON.parse(jsonPayload); 
     }
 
-    // Executa a configuração do menu ao carregar a página
     document.addEventListener('DOMContentLoaded', configurarMenu);
 
     </script>

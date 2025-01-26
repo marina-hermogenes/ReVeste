@@ -34,8 +34,6 @@
             }
 
             const tokenPayload = parseJWT(token);
-            console.log(tokenPayload);
-
             const codigo = tokenPayload?.userId 
 
             if (!codigo) {
