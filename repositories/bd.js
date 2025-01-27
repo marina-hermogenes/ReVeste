@@ -7,10 +7,10 @@ async function conectar() {
 
   const pool = new pg.Pool({
     user: "postgres",
-    password: "",
+    password: "senha",
     host: "localhost",
     port: 5432,
-    database: "",
+    database: "ES",
   });
   global.connection = pool;
   console.log("POOL" + pool);
