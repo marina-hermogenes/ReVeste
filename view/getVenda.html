@@ -70,8 +70,10 @@
                                 if (venda.mensagem == null){
                                     venda.mensagem = "";
                                 }
-
-                                row.innerHTML = ``
+                                
+                                if (venda.numero == null){
+                                    venda.numero = "S/N";
+                                }
                                 row.innerHTML = `
                                     <div class="cell1">${venda.bairro}</div>
                                     <div class="cell2">${venda.numero}</div>
@@ -172,7 +174,6 @@
         function parseJWT(token) {
             if (!token) return null;
 
-            // Decodifica o payload (segunda parte do JWT)
             const base64Url = token.split('.')[1];
             if (!base64Url) return null;
 
@@ -184,7 +185,7 @@
                     .join('')
             );
 
-            return JSON.parse(jsonPayload); // Retorna o payload como um objeto
+            return JSON.parse(jsonPayload); 
         }
     </script>
 </body>

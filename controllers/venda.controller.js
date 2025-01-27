@@ -21,12 +21,13 @@ async function deleteVenda(req, res) {
 }
 
 async function createVenda(req, res) {
-  const { codigoUsuario, codigoEndereco, products } = req.body;
+  const { codigoUsuario, codigoEndereco, mensagem, products } = req.body;
 
   try {
     const venda = await vendaServices.createVenda(
       codigoUsuario,
       codigoEndereco,
+      mensagem,
       products
     );
     res.status(201).json(venda);

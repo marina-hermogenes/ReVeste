@@ -8,7 +8,7 @@ async function deleteVenda(codigo) {
   return await vendaRepository.deleteVenda(codigo);
 }
 
-async function createVenda(codigoUsuario, codigoEndereco, roupas) {
+async function createVenda(codigoUsuario, codigoEndereco, mensagem, roupas) {
   // Validação básica de dados
   if (!codigoUsuario || !codigoEndereco || !roupas || roupas.length === 0) {
     throw new Error("Dados insuficientes para criar uma venda.");
@@ -17,6 +17,7 @@ async function createVenda(codigoUsuario, codigoEndereco, roupas) {
   return await vendaRepository.createVenda(
     codigoUsuario,
     codigoEndereco,
+    mensagem,
     roupas
   );
 }

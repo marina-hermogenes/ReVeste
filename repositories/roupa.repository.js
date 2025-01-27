@@ -68,7 +68,7 @@ async function getRoupasCadastradas(codigo) {
         const mimeType = pegarAssinatura(roupa.foto);
         roupa.foto = `data:${mimeType};base64,${roupa.foto.toString('base64')}`;
       } else {
-        roupa.foto = "Imagens/semFoto.png"; 
+        roupa.foto = "Imagens/default-placehorder.png"; 
       }
       return roupa;
     });
@@ -92,7 +92,7 @@ async function getRoupasVendidas(codigo) {
         const mimeType = pegarAssinatura(roupa.foto);
         roupa.foto = `data:${mimeType};base64,${roupa.foto.toString('base64')}`;
       } else {
-        roupa.foto = "Imagens/semFoto.png";  
+        roupa.foto = "Imagens/default-placeholder.png";  
       }
       return roupa;
     });

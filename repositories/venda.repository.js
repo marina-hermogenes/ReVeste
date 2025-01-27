@@ -65,7 +65,7 @@ function pegarAssinatura(foto) {
   }
 }
 
-async function createVenda(codigoUsuario, codigoEndereco, roupas) {
+async function createVenda(codigoUsuario, codigoEndereco, mensagem, roupas) {
   const conn = await bd.conectar();
   let novaVenda = null;
 
@@ -75,8 +75,8 @@ async function createVenda(codigoUsuario, codigoEndereco, roupas) {
 
     // Insere a nova venda
     const resultVenda = await conn.query(
-      "INSERT INTO venda (codigoUsuario, codigoEndereco, horario) VALUES ($1, $2, NOW()) RETURNING *",
-      [codigoUsuario, codigoEndereco]
+      "INSERT INTO venda (codigoUsuario, codigoEndereco, horario, mensagem) VALUES ($1, $2, NOW(), $3) RETURNING *",
+      [codigoUsuario, codigoEndereco, mensagem]
     );
     novaVenda = resultVenda.rows[0]; // Obtemos os dados da nova venda
 
