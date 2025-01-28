@@ -42,16 +42,52 @@ O sistema opera de forma autônoma e completa, sem a necessidade de integração
 
 ```
 ReVeste/
+|-- Diagramas/
+|-- |-- diagrama de sequência.pdf
+|-- |-- diagramaDeClasses.drawio.png
+|-- |-- diagramaImplantacao.png
+|-- |-- diagramaPacotes.png
 |-- Padrões Adotados/
 |   |-- Regras de Verificação e Analise de Requisitos.md
 |-- Requisitos/
-|   |-- docRequisitosVersao1.0.odt
+|   |-- docRequisitosVersao3.0.odt
 |-- |-- Diagrama de casos de uso/
 |-- |-- |-- compradorUML.png
 |-- |-- |-- usuarioUML.png
 |-- |-- |-- vendedorUML.png
-|-- Diagramas/
 |   |-- diagramaDeClasses.drawio.png
+|-- src/
+|-- |-- controllers/
+|-- |-- |-- auth.controller.js
+|-- |-- |-- endereco.controller.js
+|-- |-- |-- roupa.controller.js
+|-- |-- |-- usuario.controller.js
+|-- |-- |-- venda.controller.js
+|-- |-- middleware/
+|-- |-- |-- auth.middleware.js
+|-- |-- node_modules/
+|-- |-- repositories/
+|-- |-- |-- bd.js
+|-- |-- |-- endereco.repository.js
+|-- |-- |-- roupa.repository.js
+|-- |-- |-- usuario.repository.js
+|-- |-- |-- venda.repository.js
+|-- |-- routes/
+|-- |-- |-- endereco.routes.js
+|-- |-- |-- roupa.routes.js
+|-- |-- |-- usuario.routes.js
+|-- |-- |-- venda.routes.js
+|-- |-- services/
+|-- |-- |-- endereco.services.js
+|-- |-- |-- roupa.services.js
+|-- |-- |-- usuario.services.js
+|-- |-- |-- venda.services.js
+|-- |-- view/
+|-- .gitignore
+|-- bd.sql
+|-- index.js
+|-- package-lock.json
+|-- package.json
 |-- README.md
 ```
 
