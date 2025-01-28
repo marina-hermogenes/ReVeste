@@ -41,7 +41,6 @@ async function createVenda(req, res) {
 
 async function updateVenda(req, res) {
   const { codigoVenda, codigoEndereco, mensagem, products } = req.body;
-
   try {
     const venda = await vendaServices.updateVenda(
       codigoVenda,
@@ -58,9 +57,21 @@ async function updateVenda(req, res) {
   }
 }
 
+async function getUmaVenda(req, res) {
+  const codigo = req.params.codigo;
+  console.log("Entrou no controller")
+  const dados = await vendaServices.getUmaVenda(codigo);
+  if (dados) {
+    res.status(201).json(dados);
+  } else {
+    res.status(500).json({ error: "Erro ao consultar venda." });
+  }
+}
+
 export default {
   getVenda,
   deleteVenda,
   createVenda,
-  updateVenda
+  updateVenda,
+  getUmaVenda
 };

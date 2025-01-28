@@ -36,9 +36,14 @@ async function updateVenda(codigoVenda, codigoEndereco, mensagem, roupas) {
   );
 }
 
+async function getUmaVenda(codigo) {
+  return await vendaRepository.getUmaVenda(codigo);
+}
+
 export default {
   getVenda,
   deleteVenda,
   createVenda,
-  updateVenda
+  updateVenda,
+  getUmaVenda
 };

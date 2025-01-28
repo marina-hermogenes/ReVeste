@@ -281,7 +281,7 @@ async function getAllRoupas() {
   const conn = await bd.conectar();
   let dados = null;
   try {
-    const query = "select * from roupa;";
+    const query = "select * from roupa where disponivel=true;";
     const result = await conn.query(query);
     dados = result.rows;
 

@@ -140,9 +140,37 @@ async function updateVenda(codigoVenda, codigoEndereco, mensagem, roupas) {
   return vendaEdit;
 }
 
+async function getUmaVenda(codigo) {
+  const conn = await bd.conectar();
+  let dados = null;
+  try {
+    const query = await conn.query(
+      "select venda.codigo, roupa.nome, roupa.foto, endereco.bairro, endereco.numero, endereco.cidade, endereco.estado, venda.horario, venda.mensagem from venda, endereco, roupa where venda.codigo=$1 and endereco.codigo = venda.codigoEndereco and roupa.codigoVenda = venda.codigo order by venda.horario desc",
+      [codigo]
+    );
+    console.log(query.rows);
+    dados = query.rows;
+    dados = dados.map((venda) => {
+      if (venda.foto) {
+        const mimeType = pegarAssinatura(venda.foto);
+        venda.foto = `data:${mimeType};base64,${venda.foto.toString("base64")}`;
+      } else {
+        venda.foto = "Imagens/semFoto.png";
+      }
+      return venda;
+    });
+  } catch (erro) {
+    console.log(erro);
+  } finally {
+    conn.release();
+  }
+  return dados;
+}
+
 export default {
   getVenda,
   deleteVenda,
   createVenda,
-  updateVenda
+  updateVenda,
+  getUmaVenda
 };
