@@ -74,11 +74,7 @@
                     <img src="imagens/lupa.png" class="submit-icon" />
                 </div>
             </form>
-<<<<<<< HEAD
-            <a href="" id="carrinho">
-=======
             <a href="javascript:void(0);" id="carrinho" onclick="acessarCarrinho()">
->>>>>>> develop
                 <img src="imagens/carrinho-de-compras.png">
             </a>
             <a href="" id="perfil">
@@ -332,11 +328,7 @@
 
             if (temEndereco) {
                 dropdownMenu.innerHTML += `
-<<<<<<< HEAD
-                    <a href="">Consultar compras</a>
-=======
                     <a href="http://localhost:3000/getVenda.html">Consultar compras</a>
->>>>>>> develop
                 `;
             } 
 
@@ -374,13 +366,8 @@
         function parseJWT(token) {
             if (!token) return null;
 
-<<<<<<< HEAD
-        const base64Url = token.split('.')[1];
-        if (!base64Url) return null;
-=======
             const base64Url = token.split('.')[1];
             if (!base64Url) return null;
->>>>>>> develop
 
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
             const jsonPayload = decodeURIComponent(
@@ -390,12 +377,6 @@
                     .join('')
             );
 
-<<<<<<< HEAD
-        return JSON.parse(jsonPayload); 
-    }
-
-    document.addEventListener('DOMContentLoaded', configurarMenu);
-=======
             return JSON.parse(jsonPayload); 
         }
 
@@ -417,7 +398,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', configurarMenu);
->>>>>>> develop
 
     </script>
 </body>
