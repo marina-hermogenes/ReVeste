@@ -101,8 +101,48 @@ async function createVenda(codigoUsuario, codigoEndereco, mensagem, roupas) {
   return novaVenda;
 }
 
+async function updateVenda(codigoVenda, codigoEndereco, mensagem, roupas) {
+  const conn = await bd.conectar();
+  let vendaEdit = null;
+
+  try {
+    await conn.query("BEGIN");
+
+    const resultVenda = await conn.query(
+      "update venda set codigoEndereco=$2, mensagem=$3 where codigo=$1 returning *",
+      [codigoVenda, codigoEndereco, mensagem]
+    );
+    vendaEdit = resultVenda.rows[0]; 
+
+
+    await conn.query(
+      "update roupa set disponivel = true, codigoVenda = null where codigoVenda=$1",
+      [codigoVenda]
+    );
+
+
+    const updateRoupaQuery =
+      "UPDATE roupa SET disponivel = false, codigoVenda = $1 WHERE codigo = $2 AND disponivel = true";
+
+    for (const roupa of roupas) {
+      await conn.query(updateRoupaQuery, [vendaEdit.codigo, roupa.codigoRoupa]);
+    }
+
+    await conn.query("COMMIT");
+  } catch (error) {
+    console.error("Erro ao editar venda:", error);
+    await conn.query("ROLLBACK");
+    throw error;
+  } finally {
+    conn.release();
+  }
+
+  return vendaEdit;
+}
+
 export default {
   getVenda,
   deleteVenda,
   createVenda,
+  updateVenda
 };

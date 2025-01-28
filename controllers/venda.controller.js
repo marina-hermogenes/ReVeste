@@ -39,8 +39,28 @@ async function createVenda(req, res) {
   }
 }
 
+async function updateVenda(req, res) {
+  const { codigoVenda, codigoEndereco, mensagem, products } = req.body;
+
+  try {
+    const venda = await vendaServices.updateVenda(
+      codigoVenda,
+      codigoEndereco,
+      mensagem,
+      products
+    );
+    res.status(201).json(venda);
+  } catch (error) {
+    console.error("Erro ao editar venda:", error.message);
+    res.status(500).json({
+      error: "Erro ao editar venda. Verifique os dados e tente novamente.",
+    });
+  }
+}
+
 export default {
   getVenda,
   deleteVenda,
   createVenda,
+  updateVenda
 };

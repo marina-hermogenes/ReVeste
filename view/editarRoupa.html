@@ -101,7 +101,6 @@
         if (response.ok) {
           const result = await response.json();
           alert('Roupa editada com sucesso!');
-          console.log(result);
         } else {
           const error = await response.json();
           alert(`Erro: ${error.error}`);
@@ -128,7 +127,6 @@ async function carregarDadosRoupa() {
 
     const data = await response.json(); 
     const roupa = data[0]; 
-    console.log(roupa)
 
     document.getElementById('nome').value = roupa.nome;
     document.getElementById('preco').value = roupa.preco;

@@ -45,7 +45,6 @@
             }
 
             const tokenPayload = parseJWT(token);
-            console.log(tokenPayload); 
             const codigo = tokenPayload?.userId
 
             const carrinho = JSON.parse(localStorage.getItem(`carrinho_${codigo}`));
@@ -119,7 +118,6 @@
             }
 
             const tokenPayload = parseJWT(token);
-            console.log(tokenPayload); 
             const codigo = tokenPayload?.userId
 
             const selectedAddress = document.getElementById('address').value; 
@@ -164,8 +162,7 @@
                 window.location.href = 'login.html';
             }
 
-            const tokenPayload = parseJWT(token);
-            console.log(tokenPayload); 
+            const tokenPayload = parseJWT(token); 
             const codigo = tokenPayload?.userId
 
             let carrinho = JSON.parse(localStorage.getItem(`carrinho_${codigo}`)) || [];

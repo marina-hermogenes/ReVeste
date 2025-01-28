@@ -22,8 +22,23 @@ async function createVenda(codigoUsuario, codigoEndereco, mensagem, roupas) {
   );
 }
 
+async function updateVenda(codigoVenda, codigoEndereco, mensagem, roupas) {
+  // Validação básica de dados
+  if (!codigoEndereco || !roupas || roupas.length === 0) {
+    throw new Error("Dados insuficientes para editar uma venda.");
+  }
+
+  return await vendaRepository.updateVenda(
+    codigoVenda,
+    codigoEndereco,
+    mensagem,
+    roupas
+  );
+}
+
 export default {
   getVenda,
   deleteVenda,
   createVenda,
+  updateVenda
 };

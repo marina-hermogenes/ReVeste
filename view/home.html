@@ -345,7 +345,6 @@
             }
 
             const tokenPayload = parseJWT(token);
-            console.log(tokenPayload); 
             const codigo = tokenPayload?.userId
 
             const carrinho = JSON.parse(localStorage.getItem(`carrinho_${codigo}`)) || [];

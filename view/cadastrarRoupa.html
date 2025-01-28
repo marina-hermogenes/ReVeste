@@ -95,7 +95,6 @@
       }
 
       const tokenPayload = parseJWT(token);
-      console.log(tokenPayload); 
       const codigo = tokenPayload?.userId
 
       formData.append('codigoUsuario', codigo);
@@ -109,7 +108,6 @@
         if (response.ok) {
           const result = await response.json();
           alert('Roupa cadastrada com sucesso!');
-          console.log(result);
         } else {
           const error = await response.json();
           alert(`Erro: ${error.error}`);
